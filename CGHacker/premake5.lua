@@ -9,20 +9,23 @@ project "CGHacker"
 
 -- not use precompiled header
 
-    --pchheader "nmrospch.h"
-    --pchsource "src/nmrospch.cpp"
+    pchheader "cgpch.h"
+    pchsource "%{wks.location}/CGHacker/src/cgpch.cpp"
 
     files 
     {
-        --"src/nmrospch.h",
+        "%{wks.location}/CGHacker/src/CGHacker/**.h",
+        "%{wks.location}/CGHacker/src/CGHacker/**.cpp",
+        "%{wks.location}/CGHacker/src/cg.h",
+        "%{wks.location}/CGHacker/src/cgpch.h",
+        "%{wks.location}/CGHacker/src/cgpch.cpp",
     }
 
 
     defines
     {
         "_CRT_SECURE_NO_WARNINGS",
-        --"NMROS_ENABLE_ASSERT",
-        --"PLXAPI_EXPORTS"
+        "NMROS_ENABLE_ASSERT",
     }
 
     includedirs

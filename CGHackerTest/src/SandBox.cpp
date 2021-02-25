@@ -1,10 +1,14 @@
 #include <iostream>
 #include "Eigen/Dense"
 
+#include "cg.h"
 
 int main()
 {
 	Eigen::MatrixXd m(2, 2);
+	CG::Log::Init();
+	CG_INFO("Init Log system ");
+
 	m(0, 0) = 3;
 	m(1, 0) = 2.5;
 	m(0, 1) = -1;

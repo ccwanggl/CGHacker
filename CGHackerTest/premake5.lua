@@ -24,6 +24,7 @@ project "CGHackerTest"
     
     links
     {
+        "CGHacker",
         "GLFW",
         "GLAD",
         "opengl32.lib"
