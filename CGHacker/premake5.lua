@@ -29,12 +29,14 @@ project "CGHacker"
     {
         "src", 
         "vendor/spdlog/include",
-        "vendor/eigen/Eigen"
+        "vendor/eigen/Eigen",
+        "%{IncludeDir.GLFW}",
     }
 
     links 
     {
-        
+        "GLFW",
+        "opengl32.lib"
     }
 
     libdirs

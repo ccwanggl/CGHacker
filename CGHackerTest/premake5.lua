@@ -19,11 +19,13 @@ project "CGHackerTest"
         "%{wks.location}/CGHacker/vendor/eigen",
 		"%{wks.location}/CGHacker/src",
         "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}"
     }
     
     links
     {
         "GLFW",
+        "GLAD",
         "opengl32.lib"
     }
 

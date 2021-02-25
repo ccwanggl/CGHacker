@@ -27,12 +27,14 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["eigen"]   = "vendor/eigen/Eigen"
 IncludeDir["GLFW"]    = "%{wks.location}/CGHacker/vendor/glfw/include"
+IncludeDir["GLAD"]    = "%{wks.location}/CGHacker/vendor/Glad/include"
 
 
 -- projects
 group "Dependencies"
 	include "vendor"
     include "CGHacker/vendor/glfw"
+    include "CGHacker/vendor/Glad"
 group ""
 
 
