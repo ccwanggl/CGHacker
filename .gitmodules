@@ -1,0 +1,3 @@
+[submodule ".\\CGHacker\\vendor\\eigen"]
+	path = .\\CGHacker\\vendor\\eigen
+	url = https://gitlab.com/libeigen/eigen.git
