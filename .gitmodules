@@ -4,3 +4,6 @@
 [submodule ".\\CGHacker\\vendor\\glfw"]
 	path = .\\CGHacker\\vendor\\glfw
 	url = https://github.com/TheCherno/glfw.git
+[submodule ".\\CGHacker\\vendor\\spdlog"]
+	path = .\\CGHacker\\vendor\\spdlog
+	url = https://github.com/gabime/spdlog.git
