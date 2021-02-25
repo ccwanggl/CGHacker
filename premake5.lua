@@ -26,11 +26,13 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["eigen"]   = "vendor/eigen/Eigen"
+IncludeDir["GLFW"]    = "%{wks.location}/CGHacker/vendor/glfw/include"
 
 
 -- projects
 group "Dependencies"
 	include "vendor"
+    include "CGHacker/vendor/glfw"
 group ""
 
 

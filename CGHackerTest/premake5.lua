@@ -18,11 +18,13 @@ project "CGHackerTest"
 		"%{wks.location}/CGHacker/vendor/spdlog/include",
         "%{wks.location}/CGHacker/vendor/eigen",
 		"%{wks.location}/CGHacker/src",
+        "%{IncludeDir.GLFW}",
     }
     
     links
     {
-        
+        "GLFW",
+        "opengl32.lib"
     }
 
     libdirs

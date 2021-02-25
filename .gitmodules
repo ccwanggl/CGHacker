@@ -1,3 +1,6 @@
 [submodule ".\\CGHacker\\vendor\\eigen"]
 	path = .\\CGHacker\\vendor\\eigen
 	url = https://gitlab.com/libeigen/eigen.git
+[submodule ".\\CGHacker\\vendor\\glfw"]
+	path = .\\CGHacker\\vendor\\glfw
+	url = https://github.com/TheCherno/glfw.git
