@@ -1,19 +1,33 @@
 #include <iostream>
-#include "Eigen/Dense"
-
 #include "cg.h"
+#include <GLFW/glfw3.h>
 
 int main()
 {
-	Eigen::MatrixXd m(2, 2);
-	CG::Log::Init();
-	CG_INFO("Init Log system ");
 
-	m(0, 0) = 3;
-	m(1, 0) = 2.5;
-	m(0, 1) = -1;
-	m(1, 1) = m(1, 0) + m(0, 1);
-	std::cout << m << std::endl;
+	GLFWwindow* window;
+
+	if (!glfwInit())
+		return -1;
+
+	window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	glfwMakeContextCurrent(window);
+	while (!glfwWindowShouldClose(window))
+	{
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glfwSwapBuffers(window);
+
+		glfwPollEvents();
+	}
 	
+	glfwTerminate();
+
 	std::cin.get();
 }
