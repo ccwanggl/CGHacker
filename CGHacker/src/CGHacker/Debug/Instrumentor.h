@@ -9,6 +9,7 @@
 #include <thread>
 
 #include "CGHacker/Core/Log.h"
+
 namespace CG {
 
 using FloatingPointMicroseconds = std::chrono::duration<double, std::micro>;
