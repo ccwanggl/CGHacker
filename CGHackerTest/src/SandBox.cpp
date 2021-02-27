@@ -46,6 +46,8 @@ int test_glad()
 {
 	glfwInit();
 
+	// Create window use glfw
+
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Glad Test", NULL, NULL);
 	if (window == NULL)
 	{
@@ -53,6 +55,8 @@ int test_glad()
 		glfwTerminate();
 		return -1;
 	}
+
+	// Create opengl context
 
 	glfwMakeContextCurrent(window);
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
