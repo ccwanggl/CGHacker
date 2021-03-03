@@ -40,3 +40,5 @@ group ""
 
 include "CGHacker"
 include "CGHackerTest"
+
+include "premakes/learn_opengl.lua"
