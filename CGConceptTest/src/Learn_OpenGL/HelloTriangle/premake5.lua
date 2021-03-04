@@ -1,4 +1,4 @@
-project "01-GLFWConf"
+project "03-Hello-Triangle"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"
@@ -15,11 +15,13 @@ project "01-GLFWConf"
     includedirs
     {
         "%{IncludeDir.GLFW}",
+        "%{IncludeDir.GLAD}"        
     }
 
     links
     {
         "GLFW",
+        "GLAD",
         "opengl32.lib"
     }
 

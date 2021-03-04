@@ -1,4 +1,4 @@
-project "GLADConf"
+project "02-GLADConf"
     kind "ConsoleApp"
     language "C++"
     cppdialect "C++17"
