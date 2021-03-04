@@ -28,17 +28,10 @@ int main()
 		return -1;
 	}
 
-
 	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f, 0.5f, 0.0f, 
-	};
-
-	float rect_vertices[] = {
 		0.5f, 0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
-		0.0f, 0.5f, 0.0f, 
+		-0.5f, -0.5f, 0.0f, 
 		-0.5f, 0.5f, 0.0f ,
 	};
 
@@ -88,14 +81,12 @@ int main()
 	glLinkProgram(shaderProgram);
 
 
-#if 0
 	// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
 	unsigned int EBO;
 	glGenBuffers(1, &EBO);
+
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-#endif
 
 
 	// 4. 设定顶点属性指针
@@ -103,19 +94,15 @@ int main()
 	glEnableVertexAttribArray(0);
 
 
-	// ..:: 绘制代码（渲染循环中） :: ..
-#if 0
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0)
-	glBindVertexArray(0);
-#endif
-
-
 	while (!glfwWindowShouldClose(window))
 	{
 
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+		glBindVertexArray(0);
+
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
