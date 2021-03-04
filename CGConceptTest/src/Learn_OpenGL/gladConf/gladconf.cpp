@@ -60,5 +60,6 @@ int test_glad()
 int main()
 {
 	test_glad();
+
 	std::cin.get();
 }
