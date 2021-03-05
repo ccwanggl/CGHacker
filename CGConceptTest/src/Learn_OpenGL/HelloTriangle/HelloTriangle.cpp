@@ -80,6 +80,9 @@ int main()
 	glAttachShader(shaderProgram, fragmentShader);
 	glLinkProgram(shaderProgram);
 
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
 
 	// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
 	unsigned int EBO;
