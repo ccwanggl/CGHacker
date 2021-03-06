@@ -8,8 +8,8 @@ project "04-Shaders"
     
     files
     {
-        "**.h",
-        "**.cpp"
+        "src/**.h",
+        "src/**.cpp"
     }
 
     includedirs

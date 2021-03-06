@@ -14,6 +14,22 @@ int main()
 	}
 
 	window = glfwCreateWindow(800, 600, "Shaders", nullptr, nullptr);
+	if (!window)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	glfwMakeContextCurrent(window);
+	
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initalize GLAD" << std::endl;
+		return -1;
+	}
+
+	std::cout << glGetString(GL_VERSION) << std::endl;
+
 
 	while (!glfwWindowShouldClose(window))
 	{
