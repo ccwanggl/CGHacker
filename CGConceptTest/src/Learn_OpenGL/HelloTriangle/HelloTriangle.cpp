@@ -2,6 +2,50 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+
+struct ShaderSource
+{
+	std::string vectexShader;
+	std::string fragmentShader;
+};
+
+enum class ShaderType
+{
+	NONE=-1,
+	VERTEX=0,
+	FRAGMENT=1
+};
+
+static ShaderSource ParseShader(const std::string& filepath)
+{
+	std::fstream file(filepath);
+	std::string line;
+
+	ShaderType type = ShaderType::NONE;
+	std::stringstream ss[2];
+
+	while (std::getline(file, line))
+	{
+		if (line.find("shader") != std::string::npos)
+		{
+			if (line.find("vertex") != std::string::npos)
+				type = ShaderType::VERTEX;
+			else if (line.find("fragment") != std::string::npos)
+				type = ShaderType::FRAGMENT;
+		}
+		else
+		{
+			ss[static_cast<int>(type)] << line << "\n";
+		}
+
+	}
+
+	return { ss[0].str(), ss[1].str() };
+
+}
 
 static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
@@ -88,17 +132,6 @@ int main()
 		1, 2, 3
 	};
 
-	std::string vertexShaderSrc =
-		"#version 330 core \n "
-		"layout (location = 0) in vec3 aPos; \n"
-		//"void main(){ gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0); } ";
-		"void main(){ gl_Position = vec4(aPos, 1.0); } ";
-
-
-	std::string fragmentShaderSrc =
-		"#version 460 core \n"
-		"layout(location=0) out vec4 FragColor; \n"
-		"void main() { FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f); }";
 
 	// 1. 绑定顶点数组对象
 	unsigned int VAO;
@@ -112,7 +145,8 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-	unsigned int program = CreateShader(vertexShaderSrc, fragmentShaderSrc);
+	ShaderSource src = ParseShader("res/shaders/basic.shader");
+	unsigned int program = CreateShader(src.vectexShader, src.fragmentShader);
 	// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
 	unsigned int EBO;
 	glGenBuffers(1, &EBO);
