@@ -6,6 +6,9 @@
 #include <string>
 #include <sstream>
 
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
+
 struct ShaderSource
 {
 	std::string vectexShader;
@@ -123,63 +126,58 @@ int main()
 		return -1;
 	}
 
-
-	float vertices[] = {
-		0.5f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f, 
-		-0.5f, 0.5f, 0.0f ,
-	};
-
-	unsigned int indices[] = {
-		0, 1, 3,
-		1, 2, 3
-	};
-
-
-	// 1. 绑定顶点数组对象
-	unsigned int VAO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-
-	// 2. 把我们的顶点数组复制到一个顶点缓冲中，供 OpenGL 使用
-
-	unsigned int VBO;
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	ShaderSource src = ParseShader("res/shaders/basic.shader");
-	unsigned int program = CreateShader(src.vectexShader, src.fragmentShader);
-	// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
-	unsigned int EBO;
-	glGenBuffers(1, &EBO);
-
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-
-	// 4. 设定顶点属性指针
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-
-	while (!glfwWindowShouldClose(window))
 	{
-		glUseProgram(program);
+		float vertices[] = {
+			0.5f, 0.5f, 0.0f,
+			0.5f, -0.5f, 0.0f,
+			-0.5f, -0.5f, 0.0f,
+			-0.5f, 0.5f, 0.0f ,
+		};
+
+		unsigned int indices[] = {
+			0, 1, 3,
+			1, 2, 3
+		};
+
+		VertexBuffer vb(vertices, 4 * 3 * sizeof(float));
+
+		// 1. 绑定顶点数组对象
+		unsigned int VAO;
+		glGenVertexArrays(1, &VAO);
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+
+		// 2. 把我们的顶点数组复制到一个顶点缓冲中，供 OpenGL 使用
 
 
-		glfwSwapBuffers(window);
-		glfwPollEvents();
+		ShaderSource src = ParseShader("res/shaders/basic.shader");
+		unsigned int program = CreateShader(src.vectexShader, src.fragmentShader);
+		// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
+
+		IndexBuffer ib(indices, 6);
+
+		// 4. 设定顶点属性指针
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(0);
+
+
+		while (!glfwWindowShouldClose(window))
+		{
+			glUseProgram(program);
+			glBindVertexArray(VAO);
+			ib.Bind();
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
+
+
+			glfwSwapBuffers(window);
+			glfwPollEvents();
+		}
+
+		glDeleteProgram(program);
+
 	}
+		glfwTerminate();
 
-	glDeleteProgram(program);
-
-	glfwTerminate();
-
-	std::cin.get();
+	return 0;
 }
 
