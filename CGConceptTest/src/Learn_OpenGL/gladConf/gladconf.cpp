@@ -22,6 +22,10 @@ int test_glad()
 
 	// Create window use glfw
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	GLFWwindow* window = glfwCreateWindow(800, 600, "Glad Test", NULL, NULL);
 	if (window == NULL)
 	{
