@@ -8,8 +8,8 @@ project "03-Hello-Triangle"
     
     files
     {
-        "**.h",
-        "**.cpp"
+        "src/**.h",
+        "src/**.cpp"
     }
 
     includedirs
