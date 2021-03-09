@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 
+#include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 
@@ -139,31 +140,22 @@ int main()
 			1, 2, 3
 		};
 
+		VertexArray va;
 		VertexBuffer vb(vertices, 4 * 3 * sizeof(float));
-
-		// 1. 绑定顶点数组对象
-		unsigned int VAO;
-		glGenVertexArrays(1, &VAO);
-		glBindVertexArray(VAO);
-
-		// 2. 把我们的顶点数组复制到一个顶点缓冲中，供 OpenGL 使用
-
-
-		ShaderSource src = ParseShader("res/shaders/basic.shader");
-		unsigned int program = CreateShader(src.vectexShader, src.fragmentShader);
-		// 3. 复制我们的索引数组到一个索引缓冲中，供OpenGL使用
+		VertexBufferLayout layout;
+		layout.Push<float>(3);
+		va.AddBuffer(vb, layout);
 
 		IndexBuffer ib(indices, 6);
 
-		// 4. 设定顶点属性指针
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
+		ShaderSource src = ParseShader("res/shaders/basic.shader");
+		unsigned int program = CreateShader(src.vectexShader, src.fragmentShader);
 
 
 		while (!glfwWindowShouldClose(window))
 		{
 			glUseProgram(program);
-			glBindVertexArray(VAO);
+			va.Bind();
 			ib.Bind();
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 			glBindVertexArray(0);
